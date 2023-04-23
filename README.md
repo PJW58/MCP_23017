@@ -166,7 +166,7 @@ void interruptPin(uint8_t pin, uint8_t mode);
 - **pin** interrupt pin (0 ... 15)
 - **mode** mode CHANGE, FALLING, RISING
 
-### ** lastInterruptPin()**
+### **lastInterruptPin()**
 
 Return the last pin an interrupt occurs. Returns the number of the pin.
 
@@ -174,7 +174,7 @@ Return the last pin an interrupt occurs. Returns the number of the pin.
 uint8_t lastInterruptPin();
 ```
 
-### ** lastInterruptPinValue()**
+### **lastInterruptPinValue()**
 
 Returns the value of the last interrupted pin(HIGH / LOW, 0 / 1, true /false).
 
