@@ -1,0 +1,11 @@
+MCP23017               KEYWORD1
+
+begin                  KEYWORD2
+pinMode                KEYWORD2
+digitalRead            KEYWORD2
+digitalWrite           KEYWORD2
+interruptSetup         KEYWORD2
+interruptPin           KEYWORD2
+lastInterruptPin       KEYWORD2
+lastInterruptPinValue  KEYWORD2
+
