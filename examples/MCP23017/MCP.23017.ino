@@ -1,3 +1,6 @@
+// Attach two LED's to pin 0 and 1 (bank GPA0 and GPA1)
+// and two buttons to pin 8 and 9 (bank GPB0 and GPB1).
+
 #include "MCP23017.h"
 
 MCP23017 ioExpander;
