@@ -2,8 +2,17 @@
 
 Arduino library for Microchip MCP23017 IO expander using I2C.<br>
 The IO expander gives you additional 16 Inputs or Outputs.<br>
-The chip have to banks, GPAx (pin 0 ... 7) and GPBx (pin 8 ... 15).<br>
+The chip has two banks, GPAx (pin 0 ... 7) and GPBx (pin 8 ... 15).<br>
+
+#Credits
+This library is based on a library of the same name by Stefan Staub.
+The code is substantially still Stefan's, I have only added a couple 
+of missing functions, and renamed a couple more to be more descriptive
+of their actual function. 
+
+You can find [Stefan's work here](https://github.com/sstaub/MCP_23017)
     
+![MCP23017 Breakout board](./images/mcp23017_breakout.jpg "MCP23017 Breakout board")
 ```
           --------    
 GPB0 (0) -|1   28|- GPA7 (15)
@@ -23,7 +32,7 @@ NC       -|14  15|- A0
           --------
 ```
 
-Advices
+Advice:
 - set the RESET pin (18) to VDD (+)
 - set the Address pins (15 ... 17) for address 0 set all to GND
 
@@ -35,21 +44,21 @@ and two buttons to pin 8 and 9 (bank GPB0 and GPB1).
 ```cpp
 #include "MCP23017.h"
 
-MCP23017 ioExpander;
+MCP23017 mcp;
 
 void setup() {
-	ioExpander.begin();
-	ioExpander.pinMode(8, INPUT_PULLUP);
-	ioExpander.pinMode(9, INPUT_PULLUP);
-	ioExpander.pinMode(0, OUTPUT);
-	ioExpander.pinMode(1, OUTPUT);
-	ioExpander.digitalWrite(0, LOW);
-	ioExpander.digitalWrite(1, LOW);
+	mcp.begin();
+	mcp.pinMode(8, INPUT_PULLUP);
+	mcp.pinMode(9, INPUT_PULLUP);
+	mcp.pinMode(0, OUTPUT);
+	mcp.pinMode(1, OUTPUT);
+	mcp.digitalWrite(0, LOW);
+	mcp.digitalWrite(1, LOW);
 	}
 
 void loop() {
-	ioExpander.digitalWrite(0, !ioExpander.digitalRead(8));
-	ioExpander.digitalWrite(1, !ioExpander.digitalRead(9));
+	mcp.digitalWrite(0, !mcp.digitalRead(8));
+	mcp.digitalWrite(1, !mcp.digitalRead(9));
 	}
 ```
 
@@ -68,7 +77,7 @@ MCP23017(uint8_t i2cAddr = 0);
 **Example**
 
 ```cpp
-MCP23017 ioExpander;
+MCP23017 mcp;
 ```
 
 ## Methods
@@ -88,8 +97,8 @@ This must done in ```setup()```
 
 ```cpp
 setup() {
-  ioExpander.begin(); // default I2C class
-  ioExpander.begin(I2C1); // use I2C 1 class
+  mcp.begin(); // default I2C class
+  mcp.begin(I2C1); // use I2C1 class
   }
 ```
 
@@ -107,8 +116,8 @@ void pinMode(uint8_t pin, uint8_t mode);
 **Example**
 
 ```cpp
-ioExpander.pinMode(8, INPUT_PULLUP);
-ioExpander.pinMode(0, OUTPUT);
+mcp.pinMode(8, INPUT_PULLUP);
+mcp.pinMode(0, OUTPUT);
 ```
 
 ### **digitalRead()**
@@ -124,7 +133,7 @@ uint8_t digitalRead(uint8_t pin);
 **Example**
 
 ```cpp
-uint8_t input1 = ioExpander.digitalRead(8);
+uint8_t input1 = mcp.digitalRead(8);
 ```
 
 ### **digitalWrite()**
@@ -140,7 +149,7 @@ void digitalWrite(uint8_t pin, uint8_t value);
 **Example**
 
 ```cpp
-ioExpander.digitalWrite(0, LOW);
+mcp.digitalWrite(0, LOW);
 ```
 
 ### **interruptSetup()**
@@ -155,29 +164,45 @@ void interruptSetup(uint8_t mirroring, uint8_t open, uint8_t polarity);
 - **openDrain** set the INT pin to value or open drain
 - **polarity**  set LOW or HIGH on interrupt
 
-### **interruptPin()**
+### **enableInterruptPin()**
 
 Set the interrupt pin and it's mode.
 
 ```cpp
-void interruptPin(uint8_t pin, uint8_t mode);
+void enableInterruptPin(uint8_t pin, uint8_t mode);
 ```
 
 - **pin** interrupt pin (0 ... 15)
 - **mode** mode CHANGE, FALLING, RISING
 
-### **lastInterruptPin()**
+### **disableInterruptPin()**
+
+Disable interrupts for a pin
+
+```cpp
+void disableInterruptPin(uint8_t pin);
+```
+
+- **pin** interrupt pin (0 ... 15)
+### **getLastInterruptPin()**
 
 Return the last pin an interrupt occurs. Returns the number of the pin.
 
 ```cpp
-uint8_t lastInterruptPin();
+uint8_t getLastInterruptPin();
 ```
 
-### **lastInterruptPinValue()**
+### **getLastInterruptValue()**
 
 Returns the value of the last interrupted pin(HIGH / LOW, 0 / 1, true /false).
 
 ```cpp
-uint8_t lastInterruptPinValue();
+uint8_t getLastInterruptValue();
+```
+
+### **void clearInterrupts()**
+
+Clears outstanding interrupts
+```cpp
+void clearInterrupts();
 ```

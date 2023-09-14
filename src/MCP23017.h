@@ -101,22 +101,36 @@ public:
 	 * @param pin
 	 * @param mode CHANGE, FALLING, RISING.
 	 */
-	void interruptPin(uint8_t pin, uint8_t mode);
+	void enableInterruptPin(uint8_t pin, uint8_t mode);
 
+	/**
+	 * @brief Disable a pin for interrupt.
+	 * 
+	 * @param pin.
+	 */
+	void disableInterruptPin(uint8_t pin);
+	
 	/**
 	 * @brief Get the last interrupt pin.
 	 * 
 	 * @return pin
 	 */
-	uint8_t lastInterruptPin();
+	uint8_t getLastInterruptPin();
 
 	/**
 	 * @brief Get the value of the last interrupt pin.
 	 * 
 	 * @return value
 	 */
-	uint8_t lastInterruptPinValue();
+	uint8_t getLastInterruptValue();
 
+	/**
+	 * @brief Clear Interrupts
+	 * 
+	 * @return value
+	 */
+    void clearInterrupts();
+	
 private:
 	uint8_t i2cAddr;
 	TwoWire *wire;

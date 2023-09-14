@@ -51,18 +51,23 @@ void MCP23017::interruptSetup(uint8_t mirroring, uint8_t openDrain, uint8_t pola
 	write(MCP23X17_IOCONB, ioconfValue);
 	}
 
-void MCP23017::interruptPin(uint8_t pin, uint8_t mode) {
+void MCP23017::enableInterruptPin(uint8_t pin, uint8_t mode) {
 	// set the pin interrupt control (0 means change, 1 means compare against given value);
 	// if the mode is not CHANGE, we need to set up a default value, different value triggers interrupt
 	update(pin, (mode != CHANGE), MCP23X17_INTCONA, MCP23X17_INTCONB);
 	// In a RISING interrupt the default value is 0, interrupt is triggered when the pin goes to 1.
 	// In a FALLING interrupt the default value is 1, interrupt is triggered when pin goes to 0.
 	update(pin, (mode == FALLING), MCP23X17_DEFVALA, MCP23X17_DEFVALB);
-	// enable the pin for interrupt
-	update(pin, HIGH, MCP23X17_GPINTENA, MCP23X17_GPINTENB);
+	// enable the pin for interrupts
+	update(pin, 1, MCP23X17_GPINTENA, MCP23X17_GPINTENB);
 	}
-
-uint8_t MCP23017::lastInterruptPin() {
+	
+void MCP23017::disableInterruptPin(uint8_t pin) {
+	// disable the pin for interrupts
+	update(pin, 0, MCP23X17_GPINTENA, MCP23X17_GPINTENB);
+	}
+	
+uint8_t MCP23017::getLastInterruptPin() {
 	uint8_t intf;
 	intf = read(MCP23X17_INTFA);
 	for(uint8_t i = 0; i < 8; i++) if (bitRead(intf, i)) return i;
@@ -71,8 +76,8 @@ uint8_t MCP23017::lastInterruptPin() {
 	return MCP23X17_INT_ERR;
 	}
 
-uint8_t MCP23017::lastInterruptPinValue() {
-	uint8_t intPin = lastInterruptPin();
+uint8_t MCP23017::getLastInterruptValue() {
+	uint8_t intPin = getLastInterruptPin();
 	if(intPin != MCP23X17_INT_ERR) {
 		uint8_t intcapreg = regForPin(intPin, MCP23X17_INTCAPA, MCP23X17_INTCAPB);
 		uint8_t bit = bitForPin(intPin);
@@ -81,6 +86,11 @@ uint8_t MCP23017::lastInterruptPinValue() {
 	return MCP23X17_INT_ERR;
 	}
 
+void MCP23017::clearInterrupts() {
+	read( MCP23X17_INTCAPA );
+	read( MCP23X17_INTCAPB );	
+    }
+	
 uint8_t MCP23017::bitForPin(uint8_t pin) {
 	return pin % 8;
 	}

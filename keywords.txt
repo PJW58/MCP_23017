@@ -5,7 +5,8 @@ pinMode                KEYWORD2
 digitalRead            KEYWORD2
 digitalWrite           KEYWORD2
 interruptSetup         KEYWORD2
-interruptPin           KEYWORD2
-lastInterruptPin       KEYWORD2
-lastInterruptPinValue  KEYWORD2
+enableInterruptPin     KEYWORD2
+disableInterruptPin    KEYWORD2
+getLastInterruptPin    KEYWORD2
+getLastInterruptValue  KEYWORD2
 
