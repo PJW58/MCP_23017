@@ -4,7 +4,7 @@ Arduino library for Microchip MCP23017 IO expander using I2C.<br>
 The IO expander gives you additional 16 Inputs or Outputs.<br>
 The chip has two banks, GPAx (pin 0 ... 7) and GPBx (pin 8 ... 15).<br>
 
-#Credits
+## Credits
 This library is based on a library of the same name by Stefan Staub.
 The code is substantially still Stefan's, I have only added a couple 
 of missing functions, and renamed a couple more to be more descriptive
@@ -31,10 +31,18 @@ SDA      -|13  16|- A1
 NC       -|14  15|- A0
           --------
 ```
-
-Advice:
-- set the RESET pin (18) to VDD (+)
-- set the Address pins (15 ... 17) for address 0 set all to GND
+I2C bus device address setting:
+```
+0 1 0  0 A2 A1 A0 
+0 1 0  0 0  0  0    0x20
+0 1 0  0 0  0  1    0x21
+0 1 0  0 0  1  0    0x22
+0 1 0  0 0  1  1    0x23
+0 1 0  0 1  0  0    0x24
+0 1 0  0 1  0  1    0x25
+0 1 0  0 1  1  0    0x26
+0 1 0  0 1  1  1    0x27
+```
 
 ## Example
 Here is a simple example which shows the capabilities of the library.<br>

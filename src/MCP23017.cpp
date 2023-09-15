@@ -92,12 +92,12 @@ void MCP23017::clearInterrupts() {
     }
 	
 uint8_t MCP23017::bitForPin(uint8_t pin) {
-	return pin % 8;
-	}
+    return pin % 8;
+    }
 
 uint8_t MCP23017::regForPin(uint8_t pin, uint8_t portAaddr, uint8_t portBaddr) {
-	return(pin < 8) ? portAaddr : portBaddr;
-	}
+    return(pin < 8) ? portAaddr : portBaddr;
+    }
 
 uint8_t MCP23017::read(uint8_t addr) {
 	wire->beginTransmission(MCP23X17_ADDRESS | i2cAddr);

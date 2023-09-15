@@ -11,35 +11,34 @@
 #include "Arduino.h"
 #include "Wire.h"
 
-#define MCP23X17_ADDRESS  0x20
+static const uint8_t MCP23X17_ADDRESS  = 0x20;
+static const uint8_t MCP23X17_INT_ERR  = 0xFF;
 
-// registers port A
-#define MCP23X17_IODIRA   0x00
-#define MCP23X17_IPOLA    0x02
-#define MCP23X17_GPINTENA 0x04
-#define MCP23X17_DEFVALA  0x06
-#define MCP23X17_INTCONA  0x08
-#define MCP23X17_IOCONA   0x0A
-#define MCP23X17_GPPUA    0x0C
-#define MCP23X17_INTFA    0x0E
-#define MCP23X17_INTCAPA  0x10
-#define MCP23X17_GPIOA    0x12
-#define MCP23X17_OLATA    0x14
+// Registers Port A
+static const uint8_t MCP23X17_IODIRA   = 0x00;   // IODIR:   I/O DIRECTION REGISTER
+static const uint8_t MCP23X17_IPOLA    = 0x02;   // IIPOL:   INPUT POLARITY PORT REGISTER
+static const uint8_t MCP23X17_GPINTENA = 0x04;   // GPINTEN: INTERRUPT-ON-CHANGE PINS
+static const uint8_t MCP23X17_DEFVALA  = 0x06;   // DEFVAL:  DEFAULT VALUE REGISTER
+static const uint8_t MCP23X17_INTCONA  = 0x08;   // INTCON:  INTERRUPT-ON-CHANGE CONTROL REGISTER
+static const uint8_t MCP23X17_IOCONA   = 0x0A;   // IOCON:   I/O EXPANDER CONFIGURATION REGISTER
+static const uint8_t MCP23X17_GPPUA    = 0x0C;   // GPPU:    GPIO PULL-UP RESISTOR REGISTER
+static const uint8_t MCP23X17_INTFA    = 0x0E;   // INTF:    INTERRUPT FLAG REGISTER 
+static const uint8_t MCP23X17_INTCAPA  = 0x10;   // INTCAP:  INTERRUPT CAPTURED VALUE FOR PORT REGISTER 
+static const uint8_t MCP23X17_GPIOA    = 0x12;   // GPIO:    GENERAL PURPOSE I/O PORT REGISTER
+static const uint8_t MCP23X17_OLATA    = 0x14;   // OLAT:    OUTPUT LATCH REGISTER 0
 
-// registers port B
-#define MCP23X17_IODIRB   0x01
-#define MCP23X17_IPOLB    0x03
-#define MCP23X17_GPINTENB 0x05
-#define MCP23X17_DEFVALB  0x07
-#define MCP23X17_INTCONB  0x09
-#define MCP23X17_IOCONB   0x0B
-#define MCP23X17_GPPUB    0x0D
-#define MCP23X17_INTFB    0x0F
-#define MCP23X17_INTCAPB  0x11
-#define MCP23X17_GPIOB    0x13
-#define MCP23X17_OLATB    0x15
-
-#define MCP23X17_INT_ERR  0xFF
+// Registers Port B
+static const uint8_t MCP23X17_IODIRB   = 0x01;
+static const uint8_t MCP23X17_IPOLB    = 0x03;
+static const uint8_t MCP23X17_GPINTENB = 0x05;
+static const uint8_t MCP23X17_DEFVALB  = 0x07;
+static const uint8_t MCP23X17_INTCONB  = 0x09;
+static const uint8_t MCP23X17_IOCONB   = 0x0B;
+static const uint8_t MCP23X17_GPPUB    = 0x0D;
+static const uint8_t MCP23X17_INTFB    = 0x0F;
+static const uint8_t MCP23X17_INTCAPB  = 0x11;
+static const uint8_t MCP23X17_GPIOB    = 0x13;
+static const uint8_t MCP23X17_OLATB    = 0x15;
 
 /**
  * @brief Class for Microchip MCP23017

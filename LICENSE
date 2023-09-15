@@ -1,6 +1,9 @@
 BSD 2-Clause License
 
-Copyright (c) 2023, Stefan Staub
+Copyright (c) 2023, Paul West
+
+A derivative work based on MCP23017 - Copyright (c) 2023, Stefan Staub
+which is licensed with the same terms.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

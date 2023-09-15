@@ -9,4 +9,4 @@ enableInterruptPin     KEYWORD2
 disableInterruptPin    KEYWORD2
 getLastInterruptPin    KEYWORD2
 getLastInterruptValue  KEYWORD2
-
+clearInterrupts        KEYWORD2
