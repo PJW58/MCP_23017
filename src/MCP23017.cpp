@@ -49,6 +49,12 @@ void MCP23017::interruptSetup(uint8_t mirroring, uint8_t openDrain, uint8_t pola
 	write(MCP23X17_IOCONA, ioconfValue);	
 	}
 
+void MCP23017::disableInterrupts() {
+	//Turns off the enable bits for all 16 ports
+	write(MCP23X17_GPINTENA, 0);
+	write(MCP23X17_GPINTENB, 0);
+	};
+	
 void MCP23017::enableInterruptPin(uint8_t pin, uint8_t mode) {
 	// set the pin interrupt control (0 means change, 1 means compare against given value);
 	// if the mode is not CHANGE, we need to set up a default value, different value triggers interrupt

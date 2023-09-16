@@ -1,6 +1,7 @@
 /*
 	Library for the Microchip MCP23017 I2C port expander
-	(c)sstaub 2023
+	(c) Paul West 2023
+	Based on a version by sstaub 2023
 	Original written by Limor Fried/Ladyada for Adafruit Industries
 	under BSD license
 */
@@ -8,8 +9,8 @@
 #ifndef MCP23017_H
 #define MCP23017_H
 
-#include "Arduino.h"
-#include "Wire.h"
+#include <Arduino.h>
+#include <Wire.h>
 
 static const uint8_t MCP23X17_ADDRESS  = 0x20;  
 static const uint8_t MCP23X17_INT_ERR  = 0xFF;
@@ -40,7 +41,7 @@ static const uint8_t MCP23X17_INTCAPB  = 0x11;
 static const uint8_t MCP23X17_GPIOB    = 0x13;
 static const uint8_t MCP23X17_OLATB    = 0x15;
 
-// I/O Control Register
+// I/O Control Register Bits
 static const uint8_t IOCON_BANK        = 7; // 8/16-Bit Mode 
 static const uint8_t IOCON_MIRROR      = 6; // INT Pins Mirror bit
 static const uint8_t IOCON_SEQOP       = 5; // Sequential Operation mode bit
@@ -103,6 +104,11 @@ public:
 	 * @param polarity  set LOW or HIGH on interrupt
 	 */
 	void interruptSetup(uint8_t mirroring, uint8_t open, uint8_t polarity);
+	
+	/**
+	 * @brief Disable all interrupts
+	 */	 
+	void disableInterrupts();
 
 	/**
 	 * @brief Setup a pin for interrupt.

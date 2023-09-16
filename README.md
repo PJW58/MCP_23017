@@ -6,15 +6,15 @@ The chip has two banks, GPAx (pin 0 ... 7) and GPBx (pin 8 ... 15).<br>
 
 ## Credits
 This library is based on a library of the same name by Stefan Staub.
-The code is substantially still Stefan's, I have only added a couple 
-of missing functions, and renamed a couple more to be more descriptive
-of their actual function. 
+Most of the code is substantially still Stefan's, I have only added a 
+couple of missing functions, and renamed a couple more to be more
+descriptive of their actual function. 
 
 You can find [Stefan's work here](https://github.com/sstaub/MCP_23017)
     
 ![MCP23017 Breakout board](./images/mcp23017_breakout.jpg "MCP23017 Breakout board")
 
-#3 Outside Documents
+## Outside Documents
 I have included these documents, but if you would prefer you can get them directly from the source.
 
 [Microchip Technology Inc. - 23x17 Datasheet](https://ww1.microchip.com/downloads/en/devicedoc/20001952c.pdf)
@@ -181,6 +181,14 @@ void interruptSetup(uint8_t mirroring, uint8_t open, uint8_t polarity);
 - **mirroring** OR both INTA and INTB pins
 - **openDrain** set the INT pin to value or open drain
 - **polarity**  set LOW or HIGH on interrupt
+
+### **void disableInterrupts()**
+
+Turns off interrupts on all pins. You can reenable them with **enableInterruptPin**
+
+```cpp
+void disableInterrupts();
+```
 
 ### **enableInterruptPin()**
 
