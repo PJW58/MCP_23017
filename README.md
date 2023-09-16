@@ -13,6 +13,16 @@ of their actual function.
 You can find [Stefan's work here](https://github.com/sstaub/MCP_23017)
     
 ![MCP23017 Breakout board](./images/mcp23017_breakout.jpg "MCP23017 Breakout board")
+
+#3 Outside Documents
+I have included these documents, but if you would prefer you can get them directly from the source.
+
+[Microchip Technology Inc. - 23x17 Datasheet](https://ww1.microchip.com/downloads/en/devicedoc/20001952c.pdf)
+
+[Microchip Technology Inc. - WebSeminar](https://www.microchip.com/stellent/groups/SiteComm_sg/documents/Training_Tutorials/en532262.pdf)
+
+[Microchip Technology Inc. - Unique Features of the MCP23X08/17 GPIO Expanders](https://ww1.microchip.com/downloads/en/AppNotes/01043a.pdf)
+
 ```
           --------    
 GPB0 (0) -|1   28|- GPA7 (15)

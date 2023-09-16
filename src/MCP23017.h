@@ -11,7 +11,7 @@
 #include "Arduino.h"
 #include "Wire.h"
 
-static const uint8_t MCP23X17_ADDRESS  = 0x20;
+static const uint8_t MCP23X17_ADDRESS  = 0x20;  
 static const uint8_t MCP23X17_INT_ERR  = 0xFF;
 
 // Registers Port A
@@ -39,6 +39,16 @@ static const uint8_t MCP23X17_INTFB    = 0x0F;
 static const uint8_t MCP23X17_INTCAPB  = 0x11;
 static const uint8_t MCP23X17_GPIOB    = 0x13;
 static const uint8_t MCP23X17_OLATB    = 0x15;
+
+// I/O Control Register
+static const uint8_t IOCON_BANK        = 7; // 8/16-Bit Mode 
+static const uint8_t IOCON_MIRROR      = 6; // INT Pins Mirror bit
+static const uint8_t IOCON_SEQOP       = 5; // Sequential Operation mode bit
+static const uint8_t IOCON_DISSLW      = 4; // Slew Rate control bit for SDA output
+static const uint8_t IOCON_HAEN        = 3; // Hardware Address Enable bit (MCP23S17 only)
+static const uint8_t IOCON_ODR         = 2; // Configures the INT pin as an open-drain output
+static const uint8_t IOCON_INTPOL      = 1; // This bit sets the polarity of the INT output pin
+//                      IOCON_RESERVED       = 0;  // Unused Bit
 
 /**
  * @brief Class for Microchip MCP23017

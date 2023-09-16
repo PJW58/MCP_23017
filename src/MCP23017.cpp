@@ -15,7 +15,7 @@ void MCP23017::begin(TwoWire &wire) {
 void MCP23017::pinMode(uint8_t pin, uint8_t mode) {
 	update(pin, !mode, MCP23X17_IODIRA, MCP23X17_IODIRB);
 	update(pin, 0, MCP23X17_GPPUA, MCP23X17_GPPUB);
-	if(mode == INPUT_PULLUP) {
+	if ( mode == INPUT_PULLUP ) {
 		update(pin, 1, MCP23X17_IODIRA, MCP23X17_IODIRB);
 		update(pin, 1, MCP23X17_GPPUA, MCP23X17_GPPUB);
 		}
@@ -37,18 +37,16 @@ uint8_t MCP23017::digitalRead(uint8_t pin) {
 	return (read(regAddr) >> bit) & 0x1;
 	}
 
-void MCP23017::interruptSetup(uint8_t mirroring, uint8_t openDrain, uint8_t polarity) {
-	uint8_t ioconfValue = read(MCP23X17_IOCONA);
-	bitWrite(ioconfValue, 6, mirroring);
-	bitWrite(ioconfValue, 2, openDrain);
-	bitWrite(ioconfValue, 1, polarity);
-	write(MCP23X17_IOCONA, ioconfValue);
 
-	ioconfValue=read(MCP23X17_IOCONB);
-	bitWrite(ioconfValue, 6, mirroring);
-	bitWrite(ioconfValue, 2, openDrain);
-	bitWrite(ioconfValue, 1, polarity);
-	write(MCP23X17_IOCONB, ioconfValue);
+void MCP23017::interruptSetup(uint8_t mirroring, uint8_t openDrain, uint8_t polarity) {
+ 	// Note: Unlike all other registers which are not shared between 
+    // the two ports (Port A and Port B), there is one register (IOCON).
+    // which is shared between the ports and affects both equally.
+	uint8_t ioconfValue = read(MCP23X17_IOCONA);
+	bitWrite(ioconfValue, IOCON_MIRROR, mirroring);
+	bitWrite(ioconfValue, IOCON_ODR,    openDrain);
+	bitWrite(ioconfValue, IOCON_INTPOL, polarity);
+	write(MCP23X17_IOCONA, ioconfValue);	
 	}
 
 void MCP23017::enableInterruptPin(uint8_t pin, uint8_t mode) {
