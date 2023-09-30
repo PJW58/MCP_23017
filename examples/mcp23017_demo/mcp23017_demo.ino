@@ -5,8 +5,8 @@
   Copyright 2023, Paul J. West
 -----------------------------------------------------------------------------
   Libraries used:
-    Wire:      Default I2C Wire library
-    MCP_23017: Version 23.9.0 
+    Wire:     Default I2C Wire library
+    MCP23017: Version 23.9.0 
 -----------------------------------------------------------------------------
   This program demonstrates the use of the MCP23017 16 Port I/O expander.
 
@@ -168,7 +168,5 @@ void loop() {
             Serial.printf( "%d %d %d %d\n", color[0],color[1],color[2],color[3] ); 
             while ( !mcp.digitalRead( intPin )) { delay( SHORT_DELAY ); }
         }
-    }
-
-    delay( QUARTER_SECOND );    
+    }    
 }
