@@ -132,9 +132,9 @@ void setup() {
 
     // Setup LED pins as output and initialize to off
     for ( uint8_t pin=0; pin < 12 ; pin++ ) {
-	      mcp.pinMode( pin, OUTPUT ); 
+	    mcp.pinMode( pin, OUTPUT ); 
         mcp.digitalWrite( pin, LOW );
-	  }
+	}
 
     // Initialize MCP23XXX interrupts
     mcp.interruptSetup( MCP23XXX_MIRROR, MCP23XXX_OPENDRAIN, LOW );
@@ -165,7 +165,7 @@ void loop() {
             uint8_t led = ( intPin - BUTTON_A );
             color[ led ] = ( color[ led ] + 1 ) & 0b0111; 
             setColor( led , color[ led ] ); 
-            Serial.printf( "%d %d %d %d\n", color[0],color[1],color[2],color[3] ); 
+            Serial.printf( "%d %d %d %d\n", color[0], color[1], color[2], color[3] ); 
             while ( !mcp.digitalRead( intPin )) { delay( SHORT_DELAY ); }
         }
     }    
