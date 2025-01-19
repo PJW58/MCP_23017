@@ -139,7 +139,7 @@ public:
 	 */
 	// 01/19/25 - PJW:
 	// uint8_t getLastInterruptValue();
-	getLastInterruptValue( uint8_t intpin = 255 );
+	uint8_t getLastInterruptValue( uint8_t intpin = 255 );
 
 	/**
 	 * @brief Clear Interrupts
