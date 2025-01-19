@@ -37,7 +37,6 @@ uint8_t MCP23017::digitalRead(uint8_t pin) {
 	return (read(regAddr) >> bit) & 0x1;
 	}
 
-
 void MCP23017::interruptSetup(uint8_t mirroring, uint8_t openDrain, uint8_t polarity) {
  	// Note: Unlike all other registers which are not shared between 
     // the two ports (Port A and Port B), there is one register (IOCON).
