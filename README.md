@@ -218,9 +218,10 @@ Return the last pin an interrupt occurs. Returns the number of the pin.
 uint8_t getLastInterruptPin();
 ```
 
-### **getLastInterruptValue()**
+### **getLastInterruptValue( uint8_t intpin = 255 )**
 
 Returns the value of the last interrupted pin(HIGH / LOW, 0 / 1, true /false).
+If pin is not specified, the value of last pin that received an interrupt will be returned.
 
 ```cpp
 uint8_t getLastInterruptValue();

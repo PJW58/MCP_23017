@@ -80,8 +80,10 @@ uint8_t MCP23017::getLastInterruptPin() {
 	return MCP23X17_INT_ERR;
 	}
 
-uint8_t MCP23017::getLastInterruptValue() {
-	uint8_t intPin = getLastInterruptPin();
+uint8_t MCP23017::getLastInterruptValue( uint8_t intpin = 255 ) {
+	// 01/19/25 - PJW:
+	// uint8_t intPin = getLastInterruptPin();
+	if !( intpin == 255 ) intPin = getLastInterruptPin();
 	if(intPin != MCP23X17_INT_ERR) {
 		uint8_t intcapreg = regForPin(intPin, MCP23X17_INTCAPA, MCP23X17_INTCAPB);
 		uint8_t bit = bitForPin(intPin);
